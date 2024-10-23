@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (submit)="submitFeedback()">
+    <ion-item>
+      <ion-label position="stacked">Lecturer Name</ion-label>
+      <ion-input [(ngModel)]="lecturerName" name="lecturerName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Course/Module Code</ion-label>
+      <ion-input [(ngModel)]="course" name="course" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Feedback</ion-label>
+      <ion-textarea [(ngModel)]="feedback" name="feedback" required></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Submit Feedback</ion-button>
+  </form>
+
+  <ion-button expand="full" color="secondary" [routerLink]="['/feedback-list']">
+    View Feedback List
+  </ion-button>
+</ion-content>

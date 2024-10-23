@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Feedback List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Search fields for lecturer name and course/module code -->
+  <ion-item>
+    <ion-label>Lecturer Name</ion-label>
+    <ion-input [(ngModel)]="lecturerNameFilter" placeholder="Enter lecturer name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Course/Module Code</ion-label>
+    <ion-input [(ngModel)]="courseFilter" placeholder="Enter course/module code"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="applyFilters()">Search</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let feedback of feedbackList">
+      <ion-label>
+        <h2>{{ feedback.lecturerName }} ({{ feedback.course }})</h2>
+        <p>{{ feedback.feedback }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
