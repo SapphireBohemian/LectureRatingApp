@@ -1,3 +1,4 @@
+//auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -22,11 +23,24 @@ export class AuthService {
 
   // Check if user is authenticated
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('token'); // Assuming the token is stored in localStorage
+  }
+
+  // Get the logged-in user's role
+  getRole(): string | null {
+    const userData = localStorage.getItem('user');
+    return userData ? JSON.parse(userData).role : null; // Assuming the user data is stored in localStorage
+  }
+
+  // Set user data and token after login
+  setSession(token: string, user: any): void {
+    localStorage.setItem('token', token); // Store token in localStorage
+    localStorage.setItem('user', JSON.stringify(user)); // Store user info including role
   }
 
   // Logout user
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user'); // Remove user data
   }
 }

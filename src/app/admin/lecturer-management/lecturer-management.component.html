@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lecturer Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let lecturer of lecturers">
+      <ion-label>{{ lecturer.username }}</ion-label>
+      <ion-button (click)="deleteLecturer(lecturer._id)">Delete</ion-button>
+      <!-- Add an edit button/link here -->
+    </ion-item>
+  </ion-list>
+
+  <form (submit)="addLecturer()">
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input [(ngModel)]="newLecturer.username" name="username" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="newLecturer.password" name="password" required></ion-input>
+    </ion-item>
+    <ion-button type="submit">Add Lecturer</ion-button>
+  </form>
+</ion-content>

@@ -11,18 +11,24 @@ export class RegisterPage {
   username: string = '';
   password: string = '';
   role: string = 'student'; // Default to student role
+  errorMessage: string = ''; // Error message for failed registration
 
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
-    this.authService.register(this.username, this.password, this.role).subscribe(
-      (response) => {
-        console.log('Registration successful:', response);
-        this.router.navigate(['/login']); // Redirect to login page after registration
-      },
-      (error) => {
-        console.error('Error during registration:', error);
-      }
-    );
+    if (this.username && this.password && this.role) {
+      this.authService.register(this.username, this.password, this.role).subscribe(
+        (response) => {
+          console.log('Registration successful:', response);
+          this.router.navigate(['/login']); // Redirect to login page after registration
+        },
+        (error) => {
+          console.error('Error during registration:', error);
+          this.errorMessage = 'Registration failed. Please try again.'; // Show an error message to the user
+        }
+      );
+    } else {
+      this.errorMessage = 'Please fill all fields'; // Handle form validation
+    }
   }
 }

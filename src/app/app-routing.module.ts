@@ -1,6 +1,7 @@
 //app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RoleGuard } from './role.guard'; // Import the role guard
 
 // Define the routes for the application
 const routes: Routes = [
@@ -13,6 +14,26 @@ const routes: Routes = [
 
   // Lazy-load the feedback list module when navigating to the 'feedback-list' route
   { path: 'feedback-list', loadChildren: () => import('./feedback-list/feedback-list.module').then(m => m.FeedbackListPageModule) },
+
+  // Role-based routes
+  { 
+    path: 'student', 
+    loadChildren: () => import('./student/student.module').then(m => m.StudentPageModule),
+    canActivate: [RoleGuard],
+    data: { role: 'student' }  // Restrict to students
+  },
+  { 
+    path: 'lecturer', 
+    loadChildren: () => import('./lecturer/lecturer.module').then(m => m.LecturerPageModule),
+    canActivate: [RoleGuard],
+    data: { role: 'lecturer' }  // Restrict to lecturers
+  },
+  { 
+    path: 'admin', 
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule),
+    canActivate: [RoleGuard],
+    data: { role: 'admin' }  // Restrict to admins
+  },
 
   // Lazy-load the login module when navigating to the 'login' route
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },

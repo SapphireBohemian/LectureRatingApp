@@ -26,5 +26,8 @@
     </ion-item>
 
     <ion-button expand="full" type="submit">Register</ion-button>
+
+    <!-- Show error message if registration fails -->
+    <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
   </form>
 </ion-content>

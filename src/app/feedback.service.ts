@@ -11,25 +11,34 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) {}
 
+  // Submit new feedback
   submitFeedback(lecturerName: string, course: string, feedback: string): Observable<any> {
-    //const feedbackData = {
-    //  lecturerName,
-   ////   course,
-    //  feedback
-  //  };
-    return this.http.post(this.apiUrl ,  { lecturerName, course, feedback });
+    return this.http.post(this.apiUrl, { lecturerName, course, feedback });
   }
 
+
+  // Get all feedback
   getFeedback(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  getFilteredFeedback(filters: any): Observable<any> {
+  // Get filtered feedback based on lecturer name and/or course
+  getFilteredFeedback(filters: any): Observable<any[]> {
     let params = new HttpParams();
     if (filters.lecturerName) params = params.append('lecturerName', filters.lecturerName);
     if (filters.course) params = params.append('course', filters.course);
 
-    return this.http.get(this.apiUrl, { params });
+    return this.http.get<any[]>(this.apiUrl, { params });
   }
 
+  // Update feedback by ID (Add this method for editing feedback)
+  updateFeedback(id: string, updatedFeedback: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, updatedFeedback);
+  }
+
+  // Delete feedback by ID
+  deleteFeedback(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
+
