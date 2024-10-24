@@ -12,12 +12,12 @@ export class FeedbackService {
   constructor(private http: HttpClient) {}
 
   submitFeedback(lecturerName: string, course: string, feedback: string): Observable<any> {
-    const feedbackData = {
-      lecturerName,
-      course,
-      feedback
-    };
-    return this.http.post(this.apiUrl + '/feedback', feedbackData);
+    //const feedbackData = {
+    //  lecturerName,
+   ////   course,
+    //  feedback
+  //  };
+    return this.http.post(this.apiUrl ,  { lecturerName, course, feedback });
   }
 
   getFeedback(): Observable<any[]> {

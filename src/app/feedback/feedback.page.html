@@ -1,29 +1,60 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Feedback</ion-title>
+    <ion-title>Submit Feedback</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form (submit)="submitFeedback()">
+  <form (ngSubmit)="submitFeedback(feedbackForm)" #feedbackForm="ngForm">
+    <!-- Lecturer Name Input -->
     <ion-item>
-      <ion-label position="stacked">Lecturer Name</ion-label>
-      <ion-input [(ngModel)]="lecturerName" name="lecturerName" required></ion-input>
+      <ion-label position="floating">Lecturer Name</ion-label>
+      <ion-input
+        [(ngModel)]="lecturerName"
+        name="lecturerName"
+        required
+        #lecturerNameInput="ngModel">
+      </ion-input>
     </ion-item>
+    <ion-text color="danger" *ngIf="lecturerNameInput.invalid && lecturerNameInput.touched">
+      Lecturer name is required.
+    </ion-text>
 
+    <!-- Course/Module Code Input -->
     <ion-item>
       <ion-label position="stacked">Course/Module Code</ion-label>
-      <ion-input [(ngModel)]="course" name="course" required></ion-input>
+      <ion-input
+        [(ngModel)]="course"
+        name="course"
+        required
+        #courseInput="ngModel">
+      </ion-input>
     </ion-item>
+    <ion-text color="danger" *ngIf="courseInput.invalid && courseInput.touched">
+      Course/Module code is required.
+    </ion-text>
 
+    <!-- Feedback Input -->
     <ion-item>
       <ion-label position="stacked">Feedback</ion-label>
-      <ion-textarea [(ngModel)]="feedback" name="feedback" required></ion-textarea>
+      <ion-textarea
+        [(ngModel)]="feedback"
+        name="feedback"
+        required
+        #feedbackInput="ngModel">
+      </ion-textarea>
     </ion-item>
+    <ion-text color="danger" *ngIf="feedbackInput.invalid && feedbackInput.touched">
+      Feedback is required.
+    </ion-text>
 
-    <ion-button expand="full" type="submit">Submit Feedback</ion-button>
+    <!-- Submit button -->
+    <ion-button expand="full" type="submit" [disabled]="feedbackForm.invalid">
+      Submit Feedback
+    </ion-button>
   </form>
 
+  <!-- Button to view feedback list -->
   <ion-button expand="full" color="secondary" [routerLink]="['/feedback-list']">
     View Feedback List
   </ion-button>

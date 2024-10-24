@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Lecture Rating Application
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,8 +13,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  
+    <h2>Welcome to the Lecture Rating Application!</h2>
+    <p>Your feedback matters! Please login or register to submit feedback.</p>
+
+    <ion-button expand="full" [routerLink]="['/login']">Login</ion-button>
+    <ion-button expand="full" color="secondary" [routerLink]="['/register']">Register</ion-button>
+  
+  
 </ion-content>

@@ -1,13 +1,12 @@
-//feedback-routing.module.ts
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FeedbackPage } from './feedback.page';
+import { RegisterPage } from './register.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FeedbackPage
+    component: RegisterPage
   }
 ];
 
@@ -15,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FeedbackPageRoutingModule {}
+export class RegisterPageRoutingModule {}
