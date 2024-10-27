@@ -12,8 +12,8 @@ export class FeedbackService {
   constructor(private http: HttpClient) {}
 
   // Submit new feedback
-  submitFeedback(lecturerName: string, course: string, feedback: string): Observable<any> {
-    return this.http.post(this.apiUrl, { lecturerName, course, feedback });
+  submitFeedback(lecturerName: string, course: string, feedback: string, rating: number): Observable<any> {
+    return this.http.post(this.apiUrl, { lecturerName, course, feedback, rating });
   }
 
 

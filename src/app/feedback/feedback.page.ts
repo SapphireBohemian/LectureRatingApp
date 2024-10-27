@@ -13,6 +13,7 @@ export class FeedbackPage implements OnInit {
   lecturerName: string = '';  // Lecturer name input
   course: string = '';        // Course/module code input
   feedback: string = '';      // Feedback input
+  rating: number = 3;
 
   constructor(
     private feedbackService: FeedbackService,
@@ -35,7 +36,7 @@ export class FeedbackPage implements OnInit {
     }
 
     // Call the feedback service to submit the feedback
-    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback).subscribe(
+    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating).subscribe(
       response => {
         console.log('Feedback submitted:', response);
         this.resetForm(feedbackForm); // Reset the form after submission
@@ -52,5 +53,6 @@ export class FeedbackPage implements OnInit {
     this.lecturerName = '';
     this.course = '';
     this.feedback = '';
+    this.rating = 3;
   }
 }

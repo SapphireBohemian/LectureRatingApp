@@ -26,6 +26,33 @@
       <ion-label position="floating">Course</ion-label>
       <ion-input [(ngModel)]="newFeedback.course" name="course" required></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Rating</ion-label>
+      <ion-radio-group [(ngModel)]="newFeedback.rating" name="rating" required>
+        <ion-item>
+          <ion-label>1</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>2</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>3</ion-label>
+          <ion-radio value="3"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>4</ion-label>
+          <ion-radio value="4"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>5</ion-label>
+          <ion-radio value="5"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-item>
+
     <ion-button type="submit">Add Feedback</ion-button>
   </form>
 </ion-content>

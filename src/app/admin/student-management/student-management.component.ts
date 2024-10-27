@@ -1,3 +1,4 @@
+//student-management.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service'; // Adjust the path as needed
@@ -10,7 +11,7 @@ import { StudentService } from 'src/app/student.service';
 })
 export class StudentManagementComponent implements OnInit {
   students: any[] = [];
-  newStudent = { username: '', password: '' }; // Adjust according to your data model
+  newStudent = { username: '', password: '', role: 'student' }; // Adjust according to your data model
 
   constructor(private studentService: StudentService, private router: Router) {}
 
@@ -27,7 +28,7 @@ export class StudentManagementComponent implements OnInit {
   addStudent() {
     this.studentService.addStudent(this.newStudent).subscribe(() => {
       this.loadStudents();
-      this.newStudent = { username: '', password: '' }; // Reset form
+      this.newStudent = { username: '', password: '', role: 'student' }; // Reset form
     });
   }
 

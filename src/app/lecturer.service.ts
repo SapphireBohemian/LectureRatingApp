@@ -1,3 +1,4 @@
+//lecturer.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,14 +7,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LecturerService {
-  private apiUrl = 'http://localhost:3000/lecturers'; // Update with your API endpoint
+  private apiUrl = 'http://localhost:3000/users'; // Update with your API endpoint
 
   constructor(private http: HttpClient) {}
 
   // Get all lecturers
-  getAllLecturers(): Observable<any> {
-    return this.http.get(this.apiUrl);
-  }
+  //getAllLecturers(): Observable<any> {
+ //   return this.http.get(this.apiUrl);
+ // }
+  
+  // Get all lecturers
+getAllLecturers(): Observable<any> {
+  return this.http.get(`${this.apiUrl}?role=lecturer`);
+}
 
   // Add a new lecturer
   addLecturer(lecturer: any): Observable<any> {

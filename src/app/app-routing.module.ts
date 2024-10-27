@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from './role.guard'; // Import the role guard
 
+// Import the components directly
+import { StudentManagementComponent } from './admin/student-management/student-management.component';
+import { LecturerManagementComponent } from './admin/lecturer-management/lecturer-management.component';
+import { FeedbackManagementComponent } from './admin/feedback-management/feedback-management.component';
+
+
 // Define the routes for the application
 const routes: Routes = [
   // Redirect the root path to the home page
@@ -39,7 +45,12 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },
 
   // Lazy-load the register module when navigating to the 'register' route
-  { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule) }
+  { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule) },
+
+  // Direct component routes for admin functions
+  { path: 'student-management', component: StudentManagementComponent },
+  { path: 'lecturer-management', component: LecturerManagementComponent },
+  { path: 'feedback-management', component: FeedbackManagementComponent },
 ];
 
 @NgModule({

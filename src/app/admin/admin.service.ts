@@ -13,22 +13,22 @@ export class AdminService {
 
   // Get all students
   getStudents(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/students`);
+    return this.http.get(`${this.apiUrl}/users`);
   }
 
   // Create a new student
   createStudent(studentData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/students`, studentData);
+    return this.http.post(`${this.apiUrl}/users`, studentData);
   }
 
   // Update a student
   updateStudent(studentId: string, studentData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/students/${studentId}`, studentData);
+    return this.http.put(`${this.apiUrl}/users/${studentId}`, studentData);
   }
 
   // Delete a student
   deleteStudent(studentId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/students/${studentId}`);
+    return this.http.delete(`${this.apiUrl}/users/${studentId}`);
   }
 
   // Similar methods for lecturers and feedback...
