@@ -16,6 +16,24 @@ export class AdminService {
     return this.http.get(`${this.apiUrl}/users`);
   }
 
+  // Get all users for admin
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users`);
+  }
+
+  getPendingUsers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users?isApproved=false`);
+  }
+
+  // Approve a user by ID
+  approveUser(userId: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/approve-user/${userId}`, {}); // Sending an empty body
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/${userId}`);
+  }
+
   // Create a new student
   createStudent(studentData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/users`, studentData);

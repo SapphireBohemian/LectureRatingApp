@@ -1,0 +1,15 @@
+.rating-trends {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Shadow for depth
+    height: 400px; // Fixed height for the chart
+    position: relative; // Relative positioning for responsive behavior
+  }
+  
+  canvas {
+    width: 100% !important; // Ensure the chart takes full width
+    height: 100% !important; // Ensure the chart takes full height
+  }
+  

@@ -12,6 +12,7 @@ export class RegisterPage {
   password: string = '';
   role: string = 'student'; // Default to student role
   errorMessage: string = ''; // Error message for failed registration
+  successMessage: string = ''; // Success message for successful registration
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -20,6 +21,7 @@ export class RegisterPage {
       this.authService.register(this.username, this.password, this.role).subscribe(
         (response) => {
           console.log('Registration successful:', response);
+          this.successMessage = 'Registration successful! Please wait for admin approval before logging in.';
           this.router.navigate(['/login']); // Redirect to login page after registration
         },
         (error) => {

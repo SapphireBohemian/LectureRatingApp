@@ -15,6 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { StudentManagementComponent } from './admin/student-management/student-management.component';
 import { LecturerManagementComponent } from './admin/lecturer-management/lecturer-management.component';
 import { FeedbackManagementComponent } from './admin/feedback-management/feedback-management.component';
+import { AverageRatingsComponent } from './components/average-ratings/average-ratings.component';
+import { RatingTrendsComponent } from './components/rating-trends/rating-trends.component';
+import { PendingUsersComponent } from './admin/pending-users/pending-users.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { FeedbackManagementComponent } from './admin/feedback-management/feedbac
     StudentManagementComponent,
     LecturerManagementComponent,
     FeedbackManagementComponent,
+    AverageRatingsComponent,
+    RatingTrendsComponent,
+    PendingUsersComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,

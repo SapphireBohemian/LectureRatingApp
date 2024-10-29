@@ -7,6 +7,10 @@ import { RoleGuard } from './role.guard'; // Import the role guard
 import { StudentManagementComponent } from './admin/student-management/student-management.component';
 import { LecturerManagementComponent } from './admin/lecturer-management/lecturer-management.component';
 import { FeedbackManagementComponent } from './admin/feedback-management/feedback-management.component';
+import { AverageRatingsComponent } from './components/average-ratings/average-ratings.component';
+import { RatingTrendsComponent } from './components/rating-trends/rating-trends.component';
+import { PendingUsersComponent } from './admin/pending-users/pending-users.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 
 // Define the routes for the application
@@ -51,6 +55,23 @@ const routes: Routes = [
   { path: 'student-management', component: StudentManagementComponent },
   { path: 'lecturer-management', component: LecturerManagementComponent },
   { path: 'feedback-management', component: FeedbackManagementComponent },
+
+  { path: 'average-ratings', component: AverageRatingsComponent },
+  { path: 'rating-trends', component: RatingTrendsComponent },
+
+  {
+    path: 'ratings-graph',
+    loadChildren: () => import('./ratings-graph/ratings-graph.module').then(m => m.RatingsGraphPageModule)
+  },
+
+  {
+    path: 'admin/pending-users', component: PendingUsersComponent
+  },
+
+  {
+    path: 'leaderboard', component: LeaderboardComponent
+  }
+
 ];
 
 @NgModule({

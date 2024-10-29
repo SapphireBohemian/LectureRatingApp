@@ -31,6 +31,11 @@ export class FeedbackService {
     return this.http.get<any[]>(this.apiUrl, { params });
   }
 
+  // Get the highest-rated lecturer
+  getHighestRatedLecturer(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/highest-rated`);
+  }
+
   // Update feedback by ID (Add this method for editing feedback)
   updateFeedback(id: string, updatedFeedback: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, updatedFeedback);

@@ -1,7 +1,7 @@
 //auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +17,21 @@ export class AuthService {
   }
 
   // Login user
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password });
-  }
+  //login(username: string, password: string): Observable<any> {
+  //  return this.http.post(`${this.apiUrl}/login`, { username, password });
+ // }
 
+ login(username: string, password: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
+    catchError(error => {
+      if (error.status === 403) {
+        return throwError(() => new Error('Account pending approval by admin.'));
+      }
+      return throwError(() => new Error('Invalid username or password'));
+    })
+  );
+}
+ 
   // Check if user is authenticated
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token'); // Assuming the token is stored in localStorage

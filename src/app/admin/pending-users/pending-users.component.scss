@@ -1,0 +1,57 @@
+/* pending-users.component.scss */
+.pending-users-container {
+    padding: 20px;
+    background-color: #f5f5f5; // Light background for contrast
+    border-radius: 8px; // Slightly rounded corners
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Add shadow for depth
+  
+    h2 {
+      color: #4a4a4a; // Dark text for the heading
+      text-align: center; // Center the heading
+      margin-bottom: 20px; // Spacing below the heading
+    }
+  
+    .table-container {
+      max-height: 400px; // Set a max height for the table
+      overflow-y: auto; // Enable vertical scrolling
+      border: 1px solid #ddd; // Add border around the table
+      margin-top: 10px; // Add spacing from the message above
+      border-radius: 8px; // Rounded corners for the container
+      background-color: #126485; // White background for table container
+    }
+  
+    .pending-users-table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        padding: 12px 15px; // Increased padding for better touch targets
+        border: 1px solid #65d8f5;
+      }
+  
+      th {
+        background-color: #007bff; // Primary color for the header
+        color: #422525; // White text for contrast
+        text-align: left; // Align text to the left
+      }
+  
+      button {
+        padding: 6px 10px; // Increased padding for the button
+        color: #fff;
+        background-color: #28a745; // Green button color
+        border: none;
+        cursor: pointer;
+        border-radius: 4px; // Rounded corners for the button
+        transition: background-color 0.3s; // Smooth transition effect
+      }
+  
+      button:hover {
+        background-color: #218838; // Darker shade on hover
+      }
+  
+      tr:nth-child(even) {
+        background-color: #6dc9c9; // Zebra stripe effect for rows
+      }
+    }
+  }
+  

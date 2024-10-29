@@ -13,11 +13,19 @@
       <ion-card-title>Welcome Admin</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Add functionalities for admin tasks -->
+      <!-- Links to existing functionalities -->
       <ion-button expand="full" routerLink="/student-management">Manage Students</ion-button>
       <ion-button expand="full" routerLink="/lecturer-management">Manage Lecturers</ion-button>
       <ion-button expand="full" routerLink="/feedback-list">View Feedback</ion-button>
       <ion-button expand="full" routerLink="/feedback-management">Manage Feedback</ion-button>
+
+      <!-- Link to pending users approval page -->
+      <ion-button expand="full" routerLink="/admin/pending-users">Approve Pending Users</ion-button>
+
+      
+      <!-- Links to new analytics pages -->
+      <ion-button expand="full" routerLink="/average-ratings">View Average Ratings</ion-button>
+      <ion-button expand="full" routerLink="/rating-trends">View Rating Trends</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

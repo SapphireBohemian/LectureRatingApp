@@ -1,0 +1,22 @@
+<ion-content>
+  <ion-list>
+    <!-- Title for the leaderboard -->
+    <ion-item>
+      <ion-label class="leaderboard-title">
+        Best Lecturers Currently Based on Student Ratings
+      </ion-label>
+    </ion-item>
+    
+    <!-- Message if no top lecturers are found -->
+    <ion-item *ngIf="topLecturers.length === 0">
+      <ion-label>No top-rated lecturers found.</ion-label>
+    </ion-item>
+    
+    <!-- List of top lecturers -->
+    <ion-item *ngFor="let lecturer of topLecturers">
+      <ion-label>
+        {{ lecturer._id }} - Average Rating: {{ lecturer.averageRating | number: '1.1-1' }} ({{ lecturer.feedbackCount }} feedbacks)
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

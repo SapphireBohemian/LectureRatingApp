@@ -1,3 +1,4 @@
+//admin-routing.module.ts
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RoleGuard } from '../role.guard'; // Ensure the guard is imported

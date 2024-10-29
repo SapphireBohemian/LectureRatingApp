@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Average Ratings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="average-rating">
+    <h2>Overall Average Rating: {{ overallAverage | number:'1.1-1' }}</h2> <!-- Display overall average -->
+    <ion-list>
+      <ion-item *ngFor="let rating of averageRatings">
+        <ion-label>
+          {{ rating._id }} - Average Rating: {{ rating.averageRating | number:'1.1-1' }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

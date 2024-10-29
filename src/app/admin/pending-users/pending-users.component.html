@@ -1,0 +1,29 @@
+<!-- pending-users.component.html -->
+<div class="pending-users-container">
+  <h2>Pending User Approvals</h2>
+  <div *ngIf="pendingUsers.length === 0">
+    <p>No pending users for approval.</p>
+  </div>
+
+  <div class="table-container" *ngIf="pendingUsers.length > 0">
+    <table class="pending-users-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of pendingUsers">
+          <td>{{ user.username }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button (click)="approveUser(user._id)">Approve</button>
+            <button (click)="deleteUser(user._id)">Delete</button> <!-- Add this line -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
