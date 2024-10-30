@@ -1,3 +1,4 @@
+//feedback.page.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -14,6 +15,7 @@ export class FeedbackPage implements OnInit {
   course: string = '';        // Course/module code input
   feedback: string = '';      // Feedback input
   rating: number = 3;
+  userId: string = '';
 
   constructor(
     private feedbackService: FeedbackService,
@@ -29,23 +31,24 @@ export class FeedbackPage implements OnInit {
   }
 
   submitFeedback(feedbackForm: NgForm) {
-    // Check if all fields are filled
+    const userId = this.authService.getUserId(); // Assuming you have a method to get the user ID
+
     if (!this.lecturerName || !this.course || !this.feedback) {
-      console.error('All fields are required!');
-      return;  // Prevent submission if any field is missing
+        console.error('All fields are required!');
+        return; // Prevent submission if any field is missing
     }
 
-    // Call the feedback service to submit the feedback
-    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating).subscribe(
-      response => {
-        console.log('Feedback submitted:', response);
-        this.resetForm(feedbackForm); // Reset the form after submission
-      },
-      error => {
-        console.error('Error submitting feedback:', error);
-      }
+    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating, userId).subscribe(
+        response => {
+            console.log('Feedback submitted:', response);
+            this.resetForm(feedbackForm); // Reset the form after submission
+        },
+        error => {
+            console.error('Error submitting feedback:', error);
+        }
     );
-  }
+}
+
 
   // Reset the form and its validation state
   resetForm(feedbackForm: NgForm) {

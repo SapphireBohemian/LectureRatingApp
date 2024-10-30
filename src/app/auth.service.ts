@@ -37,6 +37,17 @@ export class AuthService {
   );
 }
  
+// auth.service.ts
+  getUserId() {
+    const token = localStorage.getItem('token');
+    if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1])); // Decode the token to get user info
+        return payload.userId;
+    }
+    return null;
+  }
+
+
   // Check if user is authenticated
   isAuthenticated(): boolean {
     return !!localStorage.getItem(this.tokenKey); // Assuming the token is stored in localStorage
