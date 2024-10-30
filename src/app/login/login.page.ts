@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service'; // Authentication service
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,27 +19,27 @@ export class LoginPage {
       this.authService.login(this.username, this.password).subscribe(
         (response: any) => {
           console.log('Login successful:', response);
-          // Store JWT token and user role in local storage
-          this.authService.setSession(response.token, { role: response.role }); // Store user info including role
+          // Store token and user info in session
+          this.authService.setSession(response.token, { role: response.role, username: response.username });
 
-          // Redirect user based on their role
+          // Redirect user based on role
           if (response.role === 'student') {
             this.router.navigate(['/student']);
           } else if (response.role === 'lecturer') {
             this.router.navigate(['/lecturer']);
           } else if (response.role === 'admin') {
-            this.router.navigate(['/admin']); // Ensure this path is correct
+            this.router.navigate(['/admin']);
           } else {
-            console.error('Unknown role:', response.role); // Handle unknown role
+            console.error('Unknown role:', response.role);
           }
         },
         (error) => {
           console.error('Error during login:', error);
-          this.errorMessage = 'Invalid credentials. Please try again.'; // Show an error message to the user
+          this.errorMessage = 'Invalid credentials. Please try again.'; // Error message for login failure
         }
       );
     } else {
-      this.errorMessage = 'Please enter both username and password'; // Handle form validation
+      this.errorMessage = 'Please enter both username and password'; // Prompt for form validation
     }
   }
 }

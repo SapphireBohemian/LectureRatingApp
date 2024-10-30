@@ -1,3 +1,18 @@
 <ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Lecture Rating Application</ion-title>
+      <div class="header-content" *ngIf="loggedInUserName">
+        <!-- Display the logged-in username -->
+        <div class="user-info">
+          Welcome, {{ loggedInUserName }}!
+        </div>
+        <!-- Logout button, only visible when logged in -->
+        <ion-button color="danger" size="small" (click)="logout()" fill="outline" class="logout-button">
+          Logout
+        </ion-button>
+      </div>
+    </ion-toolbar>
+  </ion-header>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

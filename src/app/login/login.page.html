@@ -22,4 +22,5 @@
       Register
     </ion-button>
   </form>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Display error message if login fails -->
 </ion-content>

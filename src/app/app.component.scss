@@ -1,0 +1,22 @@
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .user-info {
+    font-size: 1.1em;
+    color: #4a90e2; /* Adjust color as desired */
+    margin-right: 15px; /* Adds space between welcome message and logout button */
+  }
+  
+  .logout-button {
+    --border-radius: 8px;
+    --background: #e63946;
+    --color: #ffffff;
+    margin-left: 15px;
+    font-size: 0.9em;
+  }
+  
