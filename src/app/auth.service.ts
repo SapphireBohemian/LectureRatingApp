@@ -37,7 +37,21 @@ export class AuthService {
   );
 }
  
-// auth.service.ts
+getToken(): string | null {
+  const token = localStorage.getItem(this.tokenKey);
+  if (token) {
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the token to get user info
+    const now = Math.floor(Date.now() / 1000); // Current time in seconds
+    if (payload.exp < now) {
+      console.error('Token has expired'); // Log if token has expired
+      return null; // Handle token expiration appropriately
+    }
+    return token;
+  }
+  return null;
+}
+
+
   getUserId() {
     const token = localStorage.getItem('token');
     if (token) {

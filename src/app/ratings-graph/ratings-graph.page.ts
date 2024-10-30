@@ -1,9 +1,8 @@
 // ratings-graph.page.ts
 import { Component, OnInit } from '@angular/core';
 import { Chart, CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip } from 'chart.js';
-import { FeedbackService } from '../feedback.service'; // Import the FeedbackService
+import { FeedbackService } from '../feedback.service';
 
-// Register the components
 Chart.register(CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip);
 
 @Component({
@@ -12,19 +11,22 @@ Chart.register(CategoryScale, LinearScale, BarController, BarElement, Title, Too
   styleUrls: ['./ratings-graph.page.scss'],
 })
 export class RatingsGraphPage implements OnInit {
-  constructor(private feedbackService: FeedbackService) {} // Inject FeedbackService
+  topLecturers: { name: string; rating: number }[] = []; // Array to store top-rated lecturers
+
+  constructor(private feedbackService: FeedbackService) {}
 
   ngOnInit() {
-    this.fetchRatings(); // Fetch ratings when the component initializes
+    this.fetchRatings();
   }
 
-  // Fetch ratings from the service
   fetchRatings() {
     this.feedbackService.getFeedback().subscribe(
       (data) => {
-        const lecturerNames = data.map((item) => item.lecturerName);
-        const ratings = data.map((item) => item.rating);
-        this.createChart(lecturerNames, ratings); // Pass data to createChart
+        const lecturerRatings = this.combineAndLimitRatings(data);
+        const lecturerNames = lecturerRatings.map(item => item.name);
+        const totalRatings = lecturerRatings.map(item => item.rating);
+        this.updateTopLecturers(lecturerRatings); // Update the top lecturers
+        this.createChart(lecturerNames, totalRatings);
       },
       (error) => {
         console.error('Error fetching feedback:', error);
@@ -32,18 +34,44 @@ export class RatingsGraphPage implements OnInit {
     );
   }
 
-  // Update createChart to accept data parameters
+  // Helper function to combine ratings and cap at 10 for graph
+  private combineAndLimitRatings(data: any[]): { name: string, rating: number }[] {
+    const ratingsByLecturer: { [key: string]: number } = {};
+
+    data.forEach((item) => {
+      if (!ratingsByLecturer[item.lecturerName]) {
+        ratingsByLecturer[item.lecturerName] = item.rating;
+      } else {
+        ratingsByLecturer[item.lecturerName] += item.rating;
+      }
+
+      // Cap the rating at 10 for each lecturer in the graph
+      if (ratingsByLecturer[item.lecturerName] > 10) {
+        ratingsByLecturer[item.lecturerName] = 10;
+      }
+    });
+
+    return Object.entries(ratingsByLecturer).map(([name, rating]) => ({ name, rating }));
+  }
+
+  // Update the top-rated lecturers
+  private updateTopLecturers(ratings: { name: string, rating: number }[]) {
+    // Sort lecturers by true cumulative ratings (before capping at 10) and get top 10
+    const sortedLecturers = ratings.sort((a, b) => b.rating - a.rating);
+    this.topLecturers = sortedLecturers.slice(0, 10);
+  }
+
   createChart(lecturerNames: string[], ratings: number[]) {
     const ctx = (document.getElementById('ratingsChart') as HTMLCanvasElement).getContext('2d');
     if (ctx) {
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: lecturerNames, // Use lecturer names for labels
+          labels: lecturerNames,
           datasets: [
             {
-              label: 'Ratings',
-              data: ratings, // Use ratings from the feedback
+              label: 'Total Ratings (Capped at 10)',
+              data: ratings,
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1,
@@ -55,10 +83,11 @@ export class RatingsGraphPage implements OnInit {
           scales: {
             y: {
               beginAtZero: true,
+              max: 10,  // Set the max display value on the y-axis to 10
             },
           },
         },
-      });
-    }
-  }
+      });
+    }
+  }
 }

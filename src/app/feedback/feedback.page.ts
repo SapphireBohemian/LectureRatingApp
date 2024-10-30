@@ -1,9 +1,9 @@
-//feedback.page.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { FeedbackService } from '../feedback.service'; // Import your feedback service
-import { NgForm } from '@angular/forms'; // Import NgForm
+import { FeedbackService } from '../feedback.service';
+import { NgForm } from '@angular/forms';
+import { ToastController } from '@ionic/angular'; // Import ToastController for user notifications
 
 @Component({
   selector: 'app-feedback',
@@ -11,51 +11,63 @@ import { NgForm } from '@angular/forms'; // Import NgForm
   styleUrls: ['./feedback.page.scss'],
 })
 export class FeedbackPage implements OnInit {
-  lecturerName: string = '';  // Lecturer name input
-  course: string = '';        // Course/module code input
-  feedback: string = '';      // Feedback input
+  lecturerName: string = '';
+  course: string = '';
+  feedback: string = '';
   rating: number = 3;
-  userId: string = '';
 
   constructor(
     private feedbackService: FeedbackService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController // Inject ToastController
   ) {}
 
   ngOnInit() {
-    // Check if the user is authenticated
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/login']); // Redirect to login if not authenticated
+      this.router.navigate(['/login']);
     }
   }
 
-  submitFeedback(feedbackForm: NgForm) {
-    const userId = this.authService.getUserId(); // Assuming you have a method to get the user ID
-
+  async submitFeedback(feedbackForm: NgForm) {
     if (!this.lecturerName || !this.course || !this.feedback) {
-        console.error('All fields are required!');
-        return; // Prevent submission if any field is missing
+      const toast = await this.toastController.create({
+        message: 'All fields are required!',
+        duration: 2000,
+        color: 'danger',
+      });
+      toast.present();
+      return;
     }
 
-    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating, userId).subscribe(
-        response => {
-            console.log('Feedback submitted:', response);
-            this.resetForm(feedbackForm); // Reset the form after submission
-        },
-        error => {
-            console.error('Error submitting feedback:', error);
-        }
+    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating).subscribe(
+      async response => {
+        console.log('Feedback submitted:', response);
+        const toast = await this.toastController.create({
+          message: 'Feedback submitted successfully!',
+          duration: 2000,
+          color: 'success',
+        });
+        toast.present();
+        this.resetForm(feedbackForm);
+      },
+      async error => {
+        console.error('Error submitting feedback:', error);
+        const toast = await this.toastController.create({
+          message: 'Error submitting feedback. Please try again.',
+          duration: 2000,
+          color: 'danger',
+        });
+        toast.present();
+      }
     );
-}
+  }
 
-
-  // Reset the form and its validation state
   resetForm(feedbackForm: NgForm) {
-    feedbackForm.resetForm();  // This will reset the form state (touched, dirty)
+    feedbackForm.resetForm();
     this.lecturerName = '';
     this.course = '';
     this.feedback = '';
-    this.rating = 3;
+    this.rating = 3; // Optional: reset to default if necessary
   }
 }

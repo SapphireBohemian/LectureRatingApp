@@ -9,7 +9,7 @@ import { FeedbackService } from 'src/app/feedback.service';
 })
 export class FeedbackManagementComponent implements OnInit {
   feedbackList: any[] = [];
-  newFeedback = { lecturerName: '', feedback: '', course: '', rating: 3, userId: '' }; // Adjust according to your data model
+  newFeedback = { lecturerName: '', feedback: '', course: '', rating: 3 }; // Adjust according to your data model
 
   constructor(private feedbackService: FeedbackService) {}
 
@@ -25,9 +25,9 @@ export class FeedbackManagementComponent implements OnInit {
 
   // Use submitFeedback to add new feedback
   addFeedback() {
-    this.feedbackService.submitFeedback(this.newFeedback.lecturerName, this.newFeedback.course, this.newFeedback.feedback, this.newFeedback.rating, this.newFeedback.userId).subscribe(() => {
+    this.feedbackService.submitFeedback(this.newFeedback.lecturerName, this.newFeedback.course, this.newFeedback.feedback, this.newFeedback.rating).subscribe(() => {
       this.loadFeedback();
-      this.newFeedback = { lecturerName: '', feedback: '', course: '', rating: 3, userId: '' }; // Reset form
+      this.newFeedback = { lecturerName: '', feedback: '', course: '', rating: 3 }; // Reset form
     });
   }
 
