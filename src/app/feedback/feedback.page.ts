@@ -54,7 +54,7 @@ export class FeedbackPage implements OnInit {
       async error => {
         console.error('Error submitting feedback:', error);
         const toast = await this.toastController.create({
-          message: 'Error submitting feedback. Please try again.',
+          message: 'Error submitting feedback, Lecturer name or Module could be wrong. Please try again.',
           duration: 2000,
           color: 'danger',
         });

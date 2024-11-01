@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip } from 'chart.js';
 import { FeedbackService } from '../feedback.service';
 
+// Register necessary Chart.js components
 Chart.register(CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip);
 
 @Component({
@@ -22,11 +23,11 @@ export class RatingsGraphPage implements OnInit {
   fetchRatings() {
     this.feedbackService.getFeedback().subscribe(
       (data) => {
-        const lecturerRatings = this.combineAndLimitRatings(data);
+        const lecturerRatings = this.combineAndCalculateAverageRatings(data);
         const lecturerNames = lecturerRatings.map(item => item.name);
-        const totalRatings = lecturerRatings.map(item => item.rating);
+        const averageRatings = lecturerRatings.map(item => item.rating); // Use averages here
         this.updateTopLecturers(lecturerRatings); // Update the top lecturers
-        this.createChart(lecturerNames, totalRatings);
+        this.createChart(lecturerNames, averageRatings); // Pass average ratings to chart
       },
       (error) => {
         console.error('Error fetching feedback:', error);
@@ -34,29 +35,34 @@ export class RatingsGraphPage implements OnInit {
     );
   }
 
-  // Helper function to combine ratings and cap at 10 for graph
-  private combineAndLimitRatings(data: any[]): { name: string, rating: number }[] {
-    const ratingsByLecturer: { [key: string]: number } = {};
+  // Helper function to combine ratings and calculate averages
+  private combineAndCalculateAverageRatings(data: any[]): { name: string, rating: number }[] {
+    const ratingsByLecturer: { [key: string]: { total: number; count: number } } = {};
 
+    // Loop through each feedback item
     data.forEach((item) => {
-      if (!ratingsByLecturer[item.lecturerName]) {
-        ratingsByLecturer[item.lecturerName] = item.rating;
-      } else {
-        ratingsByLecturer[item.lecturerName] += item.rating;
-      }
-
-      // Cap the rating at 10 for each lecturer in the graph
-      if (ratingsByLecturer[item.lecturerName] > 10) {
-        ratingsByLecturer[item.lecturerName] = 10;
+      // Ensure lecturerName and rating exist in the item
+      if (item.lecturerName && item.rating !== undefined) {
+        // Initialize if not already done
+        if (!ratingsByLecturer[item.lecturerName]) {
+          ratingsByLecturer[item.lecturerName] = { total: 0, count: 0 };
+        }
+        // Add to total and count
+        ratingsByLecturer[item.lecturerName].total += item.rating;
+        ratingsByLecturer[item.lecturerName].count += 1;
       }
     });
 
-    return Object.entries(ratingsByLecturer).map(([name, rating]) => ({ name, rating }));
+    // Calculate average ratings
+    return Object.entries(ratingsByLecturer).map(([name, { total, count }]) => {
+      const average = count > 0 ? total / count : 0; // Avoid division by zero
+      return { name, rating: Math.min(average, 10) }; // Cap at 10
+    });
   }
 
   // Update the top-rated lecturers
   private updateTopLecturers(ratings: { name: string, rating: number }[]) {
-    // Sort lecturers by true cumulative ratings (before capping at 10) and get top 10
+    // Sort lecturers by average ratings (before capping at 10) and get top 10
     const sortedLecturers = ratings.sort((a, b) => b.rating - a.rating);
     this.topLecturers = sortedLecturers.slice(0, 10);
   }
@@ -70,7 +76,7 @@ export class RatingsGraphPage implements OnInit {
           labels: lecturerNames,
           datasets: [
             {
-              label: 'Total Ratings (Capped at 10)',
+              label: 'Average Ratings (Capped at 10)',
               data: ratings,
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
@@ -87,7 +93,7 @@ export class RatingsGraphPage implements OnInit {
             },
           },
         },
-      });
-    }
-  }
+      });
+    }
+  }
 }
