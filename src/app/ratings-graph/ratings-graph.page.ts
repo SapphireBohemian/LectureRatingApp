@@ -19,7 +19,8 @@ export class RatingsGraphPage implements OnInit {
   ngOnInit() {
     this.fetchRatings();
   }
-
+    
+  
   fetchRatings() {
     this.feedbackService.getFeedback().subscribe(
       (data) => {
