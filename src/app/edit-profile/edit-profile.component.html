@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Surname</ion-label>
+      <ion-input formControlName="surname" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input formControlName="username" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input formControlName="password" type="password" required></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">Update Profile</ion-button>
+    <ion-button expand="full" color="danger" (click)="deleteAccount()">Delete Account</ion-button>
+  </form>
+</ion-content>

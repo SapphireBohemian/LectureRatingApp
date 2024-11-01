@@ -11,6 +11,7 @@ import { AverageRatingsComponent } from './components/average-ratings/average-ra
 import { RatingTrendsComponent } from './components/rating-trends/rating-trends.component';
 import { PendingUsersComponent } from './admin/pending-users/pending-users.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 // Define the routes for the application
@@ -70,6 +71,10 @@ const routes: Routes = [
 
   {
     path: 'leaderboard', component: LeaderboardComponent
+  },
+
+  {
+    path: 'edit-profile', component: EditProfileComponent
   }
 
 ];

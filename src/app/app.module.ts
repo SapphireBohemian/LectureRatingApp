@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Import HttpClientModule
 import { provideHttpClient } from '@angular/common/http';
@@ -19,6 +20,7 @@ import { AverageRatingsComponent } from './components/average-ratings/average-ra
 import { RatingTrendsComponent } from './components/rating-trends/rating-trends.component';
 import { PendingUsersComponent } from './admin/pending-users/pending-users.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,14 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     AverageRatingsComponent,
     RatingTrendsComponent,
     PendingUsersComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule // Add FormsModule here
   ],
   providers: [

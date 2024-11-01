@@ -7,91 +7,100 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000'; // Your backend URL
+  private apiUrl = 'http://localhost:3000'; // Backend URL
   private tokenKey = 'token';
-  private userKey = 'user'; // Key for storing user information
+  private userKey = 'user';
 
-   // Emit login events
-   loginStatusChange: EventEmitter<void> = new EventEmitter();
+  // Emit login events
+  loginStatusChange: EventEmitter<void> = new EventEmitter();
 
   constructor(private http: HttpClient) {}
 
-  // Register a new user
-  register(username: string, password: string, role: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { username, password, role });
+  // Register a new user with additional fields
+  register(username: string, password: string, role: string, name: string, surname: string, email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, { username, password, role, name, surname, email });
   }
 
-  // Login user
-  //login(username: string, password: string): Observable<any> {
-  //  return this.http.post(`${this.apiUrl}/login`, { username, password });
- // }
-
- login(username: string, password: string): Observable<any> {
-  return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
-    catchError(error => {
-      if (error.status === 403) {
-        return throwError(() => new Error('Account pending approval by admin.'));
-      }
-      return throwError(() => new Error('Invalid username or password'));
-    })
-  );
-}
- 
-getToken(): string | null {
-  const token = localStorage.getItem(this.tokenKey);
-  if (token) {
-    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the token to get user info
-    const now = Math.floor(Date.now() / 1000); // Current time in seconds
-    if (payload.exp < now) {
-      console.error('Token has expired'); // Log if token has expired
-      return null; // Handle token expiration appropriately
-    }
-    return token;
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
+      catchError(error => {
+        if (error.status === 403) {
+          return throwError(() => new Error('Account pending approval by admin.'));
+        }
+        return throwError(() => new Error('Invalid username or password'));
+      })
+    );
   }
-  return null;
-}
 
-
-  getUserId() {
-    const token = localStorage.getItem('token');
+  getToken(): string | null {
+    const token = localStorage.getItem(this.tokenKey);
     if (token) {
-        const payload = JSON.parse(atob(token.split('.')[1])); // Decode the token to get user info
-        return payload.userId;
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const now = Math.floor(Date.now() / 1000);
+      if (payload.exp < now) {
+        console.error('Token has expired');
+        return null;
+      }
+      return token;
     }
     return null;
   }
 
-
-  // Check if user is authenticated
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenKey); // Assuming the token is stored in localStorage
+  getUserId() {
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.userId;
+    }
+    return null;
   }
 
-  // Get the logged-in user's role
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem(this.tokenKey);
+  }
+
   getRole(): string | null {
     const userData = localStorage.getItem(this.userKey);
-    return userData ? JSON.parse(userData).role : null; // Assuming the user data is stored in localStorage
+    return userData ? JSON.parse(userData).role : null;
   }
 
-// Update setSession method to include username
+  // Update setSession to include user details
   setSession(token: string, user: any): void {
-    localStorage.setItem(this.tokenKey, token); // Store token in localStorage
-    localStorage.setItem(this.userKey, JSON.stringify(user)); // Store user info including role and username
-    this.loginStatusChange.emit(); // Emit login event to notify components
+    localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(this.userKey, JSON.stringify(user));
+    this.loginStatusChange.emit();
+  }
 
-    }
-
-  // Retrieve logged-in user's name
   getLoggedInUserName(): string | null {
     const user = localStorage.getItem(this.userKey);
     return user ? JSON.parse(user).username : null;
   }
 
-
-  // Logout user
   logout(): void {
     localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.userKey); // Remove user data
+    localStorage.removeItem(this.userKey);
     this.loginStatusChange.emit();
   }
+
+  // Additional methods for profile management
+  getUserProfile(): Observable<any> {
+    const token = this.getToken();
+    return this.http.get(`${this.apiUrl}/user/profile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  
+  updateUserProfile(data: any): Observable<any> {
+    const token = this.getToken();
+    return this.http.put(`${this.apiUrl}/user/profile`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+  
+  deleteAccount(): Observable<any> {
+    const token = this.getToken();
+    return this.http.delete(`${this.apiUrl}/user/account`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }  
 }

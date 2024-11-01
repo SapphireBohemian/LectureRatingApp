@@ -17,6 +17,21 @@
     </ion-item>
 
     <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Surname</ion-label>
+      <ion-input [(ngModel)]="surname" name="surname" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="floating">Role</ion-label>
       <ion-select [(ngModel)]="role" name="role" required>
         <ion-select-option value="student">Student</ion-select-option>
@@ -26,8 +41,6 @@
     </ion-item>
 
     <ion-button expand="full" type="submit">Register</ion-button>
-
-    <!-- Show error message if registration fails -->
     <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
   </form>
 </ion-content>
