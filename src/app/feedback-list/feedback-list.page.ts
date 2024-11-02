@@ -11,6 +11,7 @@ export class FeedbackListPage implements OnInit {
   feedbackList: any[] = [];
   lecturerNameFilter: string = ''; // Filter by lecturer name
   courseFilter: string = ''; // Filter by course/module code
+  departmentFilter: string = ''; // New filter by department
 
   constructor(private feedbackService: FeedbackService) { }
 
@@ -29,7 +30,8 @@ export class FeedbackListPage implements OnInit {
   applyFilters() {
     const filters = {
       lecturerName: this.lecturerNameFilter,
-      course: this.courseFilter
+      course: this.courseFilter,
+      department: this.departmentFilter
     };
 
     this.feedbackService.getFilteredFeedback(filters).subscribe(data => {

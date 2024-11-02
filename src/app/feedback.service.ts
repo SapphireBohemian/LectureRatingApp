@@ -20,11 +20,12 @@ export class FeedbackService {
   }
   
 
-  // Submit new feedback
-  submitFeedback(lecturerName: string, course: string, feedback: string, rating: number): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.post(this.apiUrl, { lecturerName, course, feedback, rating }, { headers });
-  }
+  // feedback.service.js
+submitFeedback(lecturerName: string, course: string, feedback: string, rating: number, department: string): Observable<any> {
+  const headers = this.getAuthHeaders();
+  return this.http.post(this.apiUrl, { lecturerName, course, feedback, rating, department }, { headers });
+}
+
 
   // Get feedback for the logged-in user
   getFeedback(): Observable<any[]> {
@@ -33,14 +34,17 @@ export class FeedbackService {
   }
 
   // Get filtered feedback based on lecturer name and/or course
-  getFilteredFeedback(filters: any): Observable<any[]> {
-    let params = new HttpParams();
-    if (filters.lecturerName) params = params.append('lecturerName', filters.lecturerName);
-    if (filters.course) params = params.append('course', filters.course);
+  // feedback.service.js
+getFilteredFeedback(filters: any): Observable<any[]> {
+  let params = new HttpParams();
+  if (filters.lecturerName) params = params.append('lecturerName', filters.lecturerName);
+  if (filters.course) params = params.append('course', filters.course);
+  if (filters.department) params = params.append('department', filters.department); // Add department filter
 
-    const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(this.apiUrl, { params, headers });
-  }
+  const headers = this.getAuthHeaders();
+  return this.http.get<any[]>(this.apiUrl, { params, headers });
+}
+
 
   // Update feedback by ID
   updateFeedback(id: string, updatedFeedback: any): Observable<any> {

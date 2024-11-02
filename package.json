@@ -29,6 +29,7 @@
     "@ionic/angular": "^8.0.0",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.6",
+    "dotenv": "^16.4.5",
     "ionicons": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.2",

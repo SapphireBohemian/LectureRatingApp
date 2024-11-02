@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <!-- Search fields for lecturer name and course/module code -->
+  <!-- Search fields for lecturer name, course/module code, and department -->
   <ion-item>
     <ion-label>Lecturer Name</ion-label>
     <ion-input [(ngModel)]="lecturerNameFilter" placeholder="Enter lecturer name"></ion-input>
@@ -16,14 +16,20 @@
     <ion-input [(ngModel)]="courseFilter" placeholder="Enter course/module code"></ion-input>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Department</ion-label>
+    <ion-input [(ngModel)]="departmentFilter" placeholder="Enter department"></ion-input> <!-- New department input -->
+  </ion-item>
+
   <ion-button expand="full" (click)="applyFilters()">Search</ion-button>
 
   <ion-list>
     <ion-item *ngFor="let feedback of feedbackList">
       <ion-label>
         <h2>{{ feedback.lecturerName }} ({{ feedback.course }})</h2>
-        <p>{{ feedback.feedback }}</p>
-        <p>Rating: {{ feedback.rating}}
+        <p>Feedback: {{ feedback.feedback }}</p>
+        <p>Rating: {{ feedback.rating }}</p>
+        <p>Department: {{ feedback.department }}</p> <!-- Display department -->
       </ion-label>
     </ion-item>
   </ion-list>

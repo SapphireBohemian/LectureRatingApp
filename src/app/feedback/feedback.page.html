@@ -20,6 +20,19 @@
       Lecturer name is required.
     </ion-text>
 
+    <ion-item>
+  <ion-label position="stacked">Department</ion-label>
+  <ion-input
+    [(ngModel)]="department"
+    name="department"
+    required
+    #departmentInput="ngModel">
+  </ion-input>
+</ion-item>
+<ion-text color="danger" *ngIf="departmentInput.invalid && departmentInput.touched">
+  Department is required.
+</ion-text>
+
     <!-- Course/Module Code Input -->
     <ion-item>
       <ion-label position="stacked">Course/Module Code</ion-label>

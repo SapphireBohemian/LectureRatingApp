@@ -15,6 +15,7 @@ export class FeedbackPage implements OnInit {
   course: string = '';
   feedback: string = '';
   rating: number = 3;
+  department: string = '';
 
   constructor(
     private feedbackService: FeedbackService,
@@ -40,7 +41,7 @@ export class FeedbackPage implements OnInit {
       return;
     }
 
-    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating).subscribe(
+    this.feedbackService.submitFeedback(this.lecturerName, this.course, this.feedback, this.rating, this.department).subscribe(
       async response => {
         console.log('Feedback submitted:', response);
         const toast = await this.toastController.create({
@@ -68,6 +69,7 @@ export class FeedbackPage implements OnInit {
     this.lecturerName = '';
     this.course = '';
     this.feedback = '';
-    this.rating = 3; // Optional: reset to default if necessary
+    this.rating = 3; 
+    this.department = '';
   }
 }
