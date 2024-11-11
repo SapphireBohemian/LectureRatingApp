@@ -1,18 +1,37 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Average Ratings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="average-rating">
-    <h2>Overall Average Rating: {{ overallAverage | number:'1.1-1' }}</h2> <!-- Display overall average -->
+  <div class="average-rating-container">
+    <h2>Overall Average Rating: <span class="highlight">{{ overallAverage | number:'1.1-1' }}</span></h2>
     <ion-list>
       <ion-item *ngFor="let rating of averageRatings">
+        <ion-icon name="star" color="warning" slot="start"></ion-icon>
         <ion-label>
           {{ rating._id }} - Average Rating: {{ rating.averageRating | number:'1.1-1' }}
         </ion-label>
       </ion-item>
     </ion-list>
   </div>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>
+
+<style>
+  .average-rating-container {
+    margin: 20px;
+    text-align: center;
+  }
+
+  .highlight {
+    color: #ff9800;
+    font-weight: bold;
+  }
+</style>

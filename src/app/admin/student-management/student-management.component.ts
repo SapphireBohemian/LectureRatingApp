@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service'; // Adjust the path as needed
 import { StudentService } from 'src/app/student.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-student-management',
@@ -11,9 +12,9 @@ import { StudentService } from 'src/app/student.service';
 })
 export class StudentManagementComponent implements OnInit {
   students: any[] = [];
-  newStudent = { username: '', password: '', role: 'student' }; // Adjust according to your data model
+  newStudent = { name: '', surname:'', email:'', username: '', password: '', role: 'student' }; // Adjust according to your data model
 
-  constructor(private studentService: StudentService, private router: Router) {}
+  constructor(private studentService: StudentService, private router: Router, private location: Location) {}
 
   ngOnInit() {
     this.loadStudents();
@@ -28,7 +29,7 @@ export class StudentManagementComponent implements OnInit {
   addStudent() {
     this.studentService.addStudent(this.newStudent).subscribe(() => {
       this.loadStudents();
-      this.newStudent = { username: '', password: '', role: 'student' }; // Reset form
+      this.newStudent = { name:'',surname:'',email:'',  username: '', password: '', role: 'student' }; // Reset form
     });
   }
 
@@ -38,5 +39,8 @@ export class StudentManagementComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
   // Additional methods for editing can be added here
 }

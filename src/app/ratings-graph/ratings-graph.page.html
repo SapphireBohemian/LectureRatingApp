@@ -1,9 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Ratings Graph</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <canvas id="ratingsChart"></canvas>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Student Ratings for Lecturers</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="ratingsChart"></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>

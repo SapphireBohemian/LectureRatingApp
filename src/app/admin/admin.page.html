@@ -1,33 +1,65 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Admin Dashboard</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">Logout</ion-button>
+      <ion-button (click)="logout()" color="danger">Logout</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card class="dashboard-card">
     <ion-card-header>
-      <ion-card-title>Welcome Admin</ion-card-title>
+      <ion-card-title>Welcome, Admin</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Links to existing functionalities -->
-      <ion-button expand="full" routerLink="/student-management">Manage Students</ion-button>
-      <ion-button expand="full" routerLink="/lecturer-management">Manage Lecturers</ion-button>
-      <ion-button expand="full" routerLink="/feedback-list">View Feedback</ion-button>
-      <ion-button expand="full" routerLink="/feedback-management">Manage Feedback</ion-button>
-
-      <!-- Link to pending users approval page -->
-      <ion-button expand="full" routerLink="/admin/pending-users">Approve Pending Users</ion-button>
-
-      <ion-button routerLink="/edit-profile">Edit Profile</ion-button>
-
-      
-      <!-- Links to new analytics pages -->
-      <ion-button expand="full" routerLink="/average-ratings">View Average Ratings</ion-button>
-      <ion-button expand="full" routerLink="/rating-trends">View Rating Trends</ion-button>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/student-management" color="tertiary">Manage Students</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/lecturer-management" color="tertiary">Manage Lecturers</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/feedback-list" color="secondary">View Feedback</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/feedback-management" color="secondary">Manage Feedback</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="full" routerLink="/admin/pending-users" color="primary">Approve Pending Users</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/average-ratings" color="success">View Average Ratings</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/rating-trends" color="success">View Rating Trends</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="full" routerLink="/edit-profile" color="primary">Edit Profile</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
+</ion-footer>

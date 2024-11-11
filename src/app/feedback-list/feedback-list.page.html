@@ -1,36 +1,110 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Feedback List</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Search fields for lecturer name, course/module code, and department -->
-  <ion-item>
-    <ion-label>Lecturer Name</ion-label>
-    <ion-input [(ngModel)]="lecturerNameFilter" placeholder="Enter lecturer name"></ion-input>
-  </ion-item>
+<ion-content class="ion-padding">
+  <!-- Search Filters -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Filter Feedback</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Lecturer Name</ion-label>
+        <ion-input [(ngModel)]="lecturerNameFilter" placeholder="Enter lecturer name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Course/Module Code</ion-label>
+        <ion-input [(ngModel)]="courseFilter" placeholder="Enter course/module code"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Department</ion-label>
+        <ion-input [(ngModel)]="departmentFilter" placeholder="Enter department"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="primary" (click)="applyFilters()">Search</ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-item>
-    <ion-label>Course/Module Code</ion-label>
-    <ion-input [(ngModel)]="courseFilter" placeholder="Enter course/module code"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Department</ion-label>
-    <ion-input [(ngModel)]="departmentFilter" placeholder="Enter department"></ion-input> <!-- New department input -->
-  </ion-item>
-
-  <ion-button expand="full" (click)="applyFilters()">Search</ion-button>
-
+  <!-- Feedback List -->
   <ion-list>
     <ion-item *ngFor="let feedback of feedbackList">
-      <ion-label>
-        <h2>{{ feedback.lecturerName }} ({{ feedback.course }})</h2>
-        <p>Feedback: {{ feedback.feedback }}</p>
-        <p>Rating: {{ feedback.rating }}</p>
-        <p>Department: {{ feedback.department }}</p> <!-- Display department -->
-      </ion-label>
+      <ion-card class="feedback-card">
+        <ion-card-header>
+          <ion-card-title>{{ feedback.lecturerName }}</ion-card-title>
+         
+        </ion-card-header>
+        <ion-card-content>
+           <p class="feedback-text"><strong>Course/Module Code:</strong> {{ feedback.course }}</p>
+            <p class="feedback-text"><strong>Department:</strong> {{ feedback.department}}</p>
+          <p class="feedback-text"><strong>Feedback:</strong> {{ feedback.feedback }}</p>
+          <p class="rating-text"><strong>Rating:</strong> 
+            <span class="rating-stars">
+              <ion-icon name="star" color="gold" *ngFor="let star of [].constructor(feedback.rating)"></ion-icon>
+            </span>
+          </p>
+        </ion-card-content>
+      </ion-card>
     </ion-item>
   </ion-list>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>
+
+<!-- Add styles for the feedback list page -->
+<style>
+  .feedback-card {
+    margin-bottom: 15px; /* Space between feedback cards */
+    border-radius: 10px; /* Rounded corners for cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #222; /* Dark background for cards */
+    color: #fff; /* White text for contrast */
+  }
+
+  ion-card-header {
+    background-color: #333; /* Darker header for card */
+    border-bottom: 1px solid #444; /* Light border for separation */
+    padding: 10px; /* Padding for card header */
+  }
+
+  ion-card-title {
+    font-weight: bold;
+    color: #ffd700; /* Gold color for lecturer name */
+  }
+
+  ion-card-subtitle {
+    font-size: 0.9em;
+    color: #87cefa; /* Light sky blue for subtitle */
+  }
+
+  .feedback-text {
+    color: #fff; /* White text for feedback */
+    margin: 10px 0; /* Spacing around feedback text */
+  }
+
+  .rating-text {
+    display: flex;
+    align-items: center;
+    color: #fff; /* White text for rating */
+  }
+
+  .rating-stars {
+    margin-left: 5px; /* Space between rating label and stars */
+  }
+
+  ion-button {
+    margin-top: 20px; /* Space above buttons */
+  }
+
+  .back-button-container {
+    margin-top: 15px; /* Space above back button */
+  }
+</style>

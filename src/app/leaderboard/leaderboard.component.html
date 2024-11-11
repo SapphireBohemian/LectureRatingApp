@@ -1,22 +1,96 @@
-<ion-content>
-  <ion-list>
-    <!-- Title for the leaderboard -->
-    <ion-item>
-      <ion-label class="leaderboard-title">
-        Best Lecturers Currently Based on Student Ratings
-      </ion-label>
-    </ion-item>
-    
-    <!-- Message if no top lecturers are found -->
-    <ion-item *ngIf="topLecturers.length === 0">
-      <ion-label>No top-rated lecturers found.</ion-label>
-    </ion-item>
-    
-    <!-- List of top lecturers -->
-    <ion-item *ngFor="let lecturer of topLecturers">
-      <ion-label>
-        {{ lecturer._id }} - Average Rating: {{ lecturer.averageRating | number: '1.1-1' }} ({{ lecturer.feedbackCount }} feedbacks)
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Leaderboard</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Top-Rated Lecturers</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <!-- Show message if no top-rated lecturers are found -->
+        <ion-item *ngIf="topLecturers.length === 0">
+          <ion-label>No top-rated lecturers found.</ion-label>
+        </ion-item>
+
+        <!-- Display top lecturers with average rating on the side -->
+        <ion-item *ngFor="let lecturer of topLecturers">
+          <ion-label>
+            <h2>{{ lecturer._id }}</h2>
+            <p>{{ lecturer.feedbackCount }} feedbacks</p>
+          </ion-label>
+          <ion-note slot="end" color="tertiary" class="avg-rating">
+            Avg Rating: {{ lecturer.averageRating | number: '1.1-1' }}
+          </ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>
+
+<!-- Add styles for the leaderboard page -->
+<style>
+  ion-card {
+    border-radius: 15px; /* Rounded corners for the card */
+    background-color: #222; /* Dark background for card */
+    color: #fff; /* White text for contrast */
+    margin-bottom: 20px; /* Spacing below the card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  }
+
+  ion-card-header {
+    background-color: #333; /* Darker header for card */
+    border-top-left-radius: 15px; /* Rounded corners */
+    border-top-right-radius: 15px; /* Rounded corners */
+    padding: 10px; /* Padding for header */
+  }
+
+  ion-card-title {
+    font-size: 1.5em; /* Larger title font */
+    color: #ffd700; /* Gold color for title */
+  }
+
+  ion-list {
+    padding: 0; /* Remove default padding for list */
+  }
+
+  ion-item {
+    background-color: #282828; /* Slightly lighter background for items */
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 10px; /* Rounded corners for items */
+  }
+
+  ion-label h2 {
+    font-size: 1.2em; /* Lecturer name font size */
+    font-weight: bold; /* Bold font for lecturer name */
+  }
+
+  ion-note {
+    font-size: 1em; /* Standard font size for notes */
+    font-weight: normal; /* Regular font weight for ratings */
+  }
+
+  .avg-rating {
+    font-weight: bold; /* Bold font for average rating */
+  }
+
+  .back-button-container {
+    margin-top: 20px; /* Space above back button */
+  }
+
+  ion-button {
+    margin-top: 20px; /* Space above buttons */
+  }
+</style>

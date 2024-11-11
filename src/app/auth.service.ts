@@ -7,7 +7,8 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000'; // Backend URL
+  private apiUrl = 'http://192.168.0.145:3000'; // Backend URL
+  //private apiUrl = 'https://lecture-rating-backend.onrender.com:3000'; // Backend URL
   private tokenKey = 'token';
   private userKey = 'user';
 

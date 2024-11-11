@@ -1,11 +1,27 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Rating Trends</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="rating-trends">
+  <div class="rating-trends-container">
     <canvas id="ratingTrendChart"></canvas>
   </div>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>
+
+<style>
+  .rating-trends-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>

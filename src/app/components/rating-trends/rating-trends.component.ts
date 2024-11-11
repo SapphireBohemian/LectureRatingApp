@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import { Chart, registerables } from 'chart.js';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-rating-trends',
@@ -11,7 +12,7 @@ export class RatingTrendsComponent implements OnInit {
   ratingTrends: any[] = [];
   trendChart: Chart | null = null;
 
-  constructor(private analyticsService: AnalyticsService) {
+  constructor(private analyticsService: AnalyticsService, private location: Location) {
     Chart.register(...registerables);
   }
 
@@ -82,5 +83,9 @@ export class RatingTrendsComponent implements OnInit {
     } else {
       console.error('Canvas element not found for ratingTrendChart.');
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

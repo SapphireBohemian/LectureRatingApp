@@ -1,0 +1,8 @@
+<resources>
+  <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
+  <string name="firebase_database_url">https://edurate-a4239.firebaseio.com</string>
+  <string name="gcm_defaultSenderId">82965061493</string>
+  <string name="google_api_key">AIzaSyBVAVdN0jxxyPABiCyl6YgPmfDK5MBtrRQ</string>
+  <string name="google_app_id">1:82965061493:android:8e9b62560a727a49bcbd3c</string>
+  <string name="firebase_storage_bucket">edurate-a4239.appspot.com</string>
+</resources>

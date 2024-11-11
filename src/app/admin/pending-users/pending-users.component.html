@@ -1,29 +1,70 @@
-<!-- pending-users.component.html -->
-<div class="pending-users-container">
-  <h2>Pending User Approvals</h2>
-  <div *ngIf="pendingUsers.length === 0">
-    <p>No pending users for approval.</p>
-  </div>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pending User Approvals</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="table-container" *ngIf="pendingUsers.length > 0">
-    <table class="pending-users-table">
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Role</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of pendingUsers">
-          <td>{{ user.username }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button (click)="approveUser(user._id)">Approve</button>
-            <button (click)="deleteUser(user._id)">Delete</button> <!-- Add this line -->
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<ion-content class="ion-padding">
+
+  <ion-card class="approval-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Pending User Approvals</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngIf="pendingUsers.length === 0">
+        <ion-text>No pending users for approval.</ion-text>
+      </div>
+
+      <ion-grid *ngIf="pendingUsers.length > 0">
+        <ion-row class="ion-padding-bottom header-row" style="font-weight: bold;">
+          <ion-col size="4">Username</ion-col>
+          <ion-col size="4">Role</ion-col>
+          <ion-col size="4" class="ion-text-center">Action</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let user of pendingUsers">
+          <ion-col size="4">{{ user.username }}</ion-col>
+          <ion-col size="4">{{ user.role }}</ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-button color="success" size="small" (click)="approveUser(user._id)">Approve</ion-button>
+            <ion-button color="danger" size="small" (click)="deleteUser(user._id)">Delete</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
+</ion-content>
+
+<style>
+  .approval-card {
+    margin: 20px; /* Add margin around the card */
+    border-radius: 10px; /* Slightly rounded corners for the card */
+  }
+
+  .header-row {
+    background-color: #f4f4f4; /* Light background for header row */
+    padding: 10px; /* Padding for better spacing */
+  }
+
+  ion-row {
+    padding: 10px; /* Padding for rows */
+  }
+
+  .back-button-container {
+    padding: 15px; /* Padding for back button */
+  }
+
+  ion-card-title {
+    font-size: 1.5em; /* Increase title size for emphasis */
+    margin: 10px 0; /* Margin above and below title */
+  }
+</style>
+

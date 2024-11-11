@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "LectureRatingApp"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "LectureRatingApp-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]

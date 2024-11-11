@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterPage {
   errorMessage = '';
   successMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private location: Location) {}
 
   register() {
     if (this.username && this.password && this.role && this.name && this.surname && this.email) {
@@ -33,5 +34,9 @@ export class RegisterPage {
     } else {
       this.errorMessage = 'Please fill all fields';
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/home']);
   }
 }

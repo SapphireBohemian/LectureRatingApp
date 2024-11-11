@@ -1,6 +1,7 @@
 //feedback-list.page.ts
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from '../feedback.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-feedback-list',
@@ -13,7 +14,7 @@ export class FeedbackListPage implements OnInit {
   courseFilter: string = ''; // Filter by course/module code
   departmentFilter: string = ''; // New filter by department
 
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService, private location: Location) { }
 
   ngOnInit() {
     this.loadFeedback();
@@ -40,4 +41,9 @@ export class FeedbackListPage implements OnInit {
       console.error('Error applying filters:', error);
     });
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }

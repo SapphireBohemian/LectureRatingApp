@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LeaderboardService {
-  private baseUrl = 'http://localhost:3000/feedback'; // Base URL for your API
+  private baseUrl = 'http://192.168.0.145/feedback'; // Base URL for your API
+  //private baseUrl = 'https://lecture-rating-backend.onrender.com'; // Backend URL
 
   constructor(private http: HttpClient) {}
 

@@ -1,90 +1,118 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Submit Feedback</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding feedback-page">
   <form (ngSubmit)="submitFeedback(feedbackForm)" #feedbackForm="ngForm">
-    <!-- Lecturer Name Input -->
-    <ion-item>
-      <ion-label position="floating">Lecturer Name</ion-label>
-      <ion-input
-        [(ngModel)]="lecturerName"
-        name="lecturerName"
-        required
-        #lecturerNameInput="ngModel">
-      </ion-input>
-    </ion-item>
-    <ion-text color="danger" *ngIf="lecturerNameInput.invalid && lecturerNameInput.touched">
-      Lecturer name is required.
-    </ion-text>
+    <ion-card class="feedback-card">
+      <ion-card-header>
+        <ion-card-title class="feedback-title">We Value Your Feedback!</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Lecturer Name Input -->
+        <ion-item>
+          <ion-label position="floating">Lecturer Name</ion-label>
+          <ion-input [(ngModel)]="lecturerName" name="lecturerName" required #lecturerNameInput="ngModel"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="lecturerNameInput.invalid && lecturerNameInput.touched">
+          Lecturer name is required.
+        </ion-text>
 
-    <ion-item>
-  <ion-label position="stacked">Department</ion-label>
-  <ion-input
-    [(ngModel)]="department"
-    name="department"
-    required
-    #departmentInput="ngModel">
-  </ion-input>
-</ion-item>
-<ion-text color="danger" *ngIf="departmentInput.invalid && departmentInput.touched">
-  Department is required.
-</ion-text>
+        <!-- Department Input -->
+        <ion-item>
+          <ion-label position="floating">Department</ion-label>
+          <ion-input [(ngModel)]="department" name="department" required #departmentInput="ngModel"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="departmentInput.invalid && departmentInput.touched">
+          Department is required.
+        </ion-text>
 
-    <!-- Course/Module Code Input -->
-    <ion-item>
-      <ion-label position="stacked">Course/Module Code</ion-label>
-      <ion-input
-        [(ngModel)]="course"
-        name="course"
-        required
-        #courseInput="ngModel">
-      </ion-input>
-    </ion-item>
-    <ion-text color="danger" *ngIf="courseInput.invalid && courseInput.touched">
-      Course/Module code is required.
-    </ion-text>
+        <!-- Course/Module Code Input -->
+        <ion-item>
+          <ion-label position="floating">Course/Module Code</ion-label>
+          <ion-input [(ngModel)]="course" name="course" required #courseInput="ngModel"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="courseInput.invalid && courseInput.touched">
+          Course/Module code is required.
+        </ion-text>
 
-    <!-- Feedback Input -->
-    <ion-item>
-      <ion-label position="stacked">Feedback</ion-label>
-      <ion-textarea
-        [(ngModel)]="feedback"
-        name="feedback"
-        required
-        #feedbackInput="ngModel">
-      </ion-textarea>
-    </ion-item>
-    <ion-text color="danger" *ngIf="feedbackInput.invalid && feedbackInput.touched">
-      Feedback is required.
-    </ion-text>
+        <!-- Feedback Text Area -->
+        <ion-item>
+          <ion-label position="stacked">Feedback</ion-label>
+          <ion-textarea [(ngModel)]="feedback" name="feedback" required #feedbackInput="ngModel"></ion-textarea>
+        </ion-item>
+        <ion-text color="danger" *ngIf="feedbackInput.invalid && feedbackInput.touched">
+          Feedback is required.
+        </ion-text>
 
-    <!-- Star Rating Input -->
-    <ion-item>
-      <ion-label position="stacked">Rating</ion-label>
-      <ion-range
-        [(ngModel)]="rating"
-        name="rating"
-        min="1"
-        max="10"
-        step="1"
-        snaps="true"
-        ticks="true">
-        <ion-icon slot="start" name="star-outline"></ion-icon>
-        <ion-icon slot="end" name="star"></ion-icon>
-      </ion-range>
-    </ion-item>
+        <!-- Star Rating Slider -->
+        <ion-item>
+          <ion-label position="stacked">Rating</ion-label>
+          <ion-range [(ngModel)]="rating" name="rating" min="1" max="10" step="1" snaps="true" ticks="true">
+            <ion-icon slot="start" name="star-outline"></ion-icon>
+            <ion-icon slot="end" name="star"></ion-icon>
+          </ion-range>
+        </ion-item>
 
-    <!-- Submit button -->
-    <ion-button expand="full" type="submit" [disabled]="feedbackForm.invalid">
-      Submit Feedback
-    </ion-button>
+        <!-- Submit Button -->
+        <ion-button expand="block" type="submit" color="success" [disabled]="feedbackForm.invalid">Submit Feedback</ion-button>
+      </ion-card-content>
+    </ion-card>
   </form>
 
-  <!-- Button to view feedback list -->
-  <ion-button expand="full" color="secondary" [routerLink]="['/feedback-list']">
-    View Feedback List
-  </ion-button>
+  <!-- View Feedback List Button -->
+  <ion-button expand="block" color="secondary" [routerLink]="['/feedback-list']">View Feedback List</ion-button>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>
+
+<!-- Add styles for the feedback page -->
+<style>
+  .feedback-page {
+    background-color: #121212; /* Dark background for the feedback page */
+    color: #fff; /* White text for contrast */
+    text-align: center; /* Center text */
+  }
+
+  .feedback-card {
+    background-color: #1e1e1e; /* Slightly lighter dark for card */
+    border-radius: 10px; /* Rounded corners for the card */
+    margin: 15px; /* Space around the card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+  }
+
+  .feedback-title {
+    color: #87cefa; /* Light sky blue for the title */
+    font-weight: bold; /* Bold title */
+  }
+
+  ion-item {
+    --background: transparent; /* Remove item background for a sleek look */
+  }
+
+  ion-label {
+    color: #87cefa; /* Light sky blue for labels */
+  }
+
+  ion-text {
+    margin: 5px 0; /* Space above and below error messages */
+  }
+
+  ion-button {
+    margin-top: 10px; /* Space between buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+  }
+
+  .back-button-container {
+    margin-top: 20px; /* Space above the back button */
+  }
+</style>

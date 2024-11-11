@@ -1,25 +1,44 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Lecturer Dashboard</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">Logout</ion-button>
+      <ion-button (click)="logout()" color="danger">Logout</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card class="dashboard-card">
     <ion-card-header>
-      <ion-card-title>Welcome Lecturer</ion-card-title>
+      <ion-card-title>Welcome, Lecturer</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Add functionalities for lecturers to view feedback -->
-      <ion-button routerLink="/feedback-list">View Feedback</ion-button>
-      <ion-button routerLink="/leaderboard">View Leaderboard</ion-button>
-
-      <ion-button routerLink="/edit-profile">Edit Profile</ion-button>
-
-
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="full" routerLink="/feedback-list" color="tertiary">View Feedback</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/leaderboard" color="secondary">View Leaderboard</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="full" routerLink="/edit-profile" color="primary">Edit Profile</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
+</ion-footer>

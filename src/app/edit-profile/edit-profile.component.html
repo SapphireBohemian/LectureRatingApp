@@ -1,32 +1,52 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Edit Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()">
-    <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input formControlName="name" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Surname</ion-label>
-      <ion-input formControlName="surname" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input formControlName="username" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input formControlName="password" type="password" required></ion-input>
-    </ion-item>
-    <ion-button expand="full" type="submit">Update Profile</ion-button>
-    <ion-button expand="full" color="danger" (click)="deleteAccount()">Delete Account</ion-button>
-  </form>
+<ion-content>
+  <div class="edit-profile-container">
+    <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Surname</ion-label>
+        <ion-input formControlName="surname" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input formControlName="username" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="password" type="password" required></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" color="success">Update Profile</ion-button>
+      <ion-button expand="block" color="danger" (click)="deleteAccount()">Delete Account</ion-button>
+    </form>
+  </div>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>
+
+<style>
+  .edit-profile-container {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+  }
+</style>

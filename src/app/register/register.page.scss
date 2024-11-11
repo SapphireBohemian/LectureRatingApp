@@ -1,0 +1,40 @@
+.back-button-container {
+    margin-top: 16px; /* Add some space above the button */
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Styles for Home, Login, and Register Pages */
+.home-page {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .welcome-section h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .button-group ion-button {
+    margin-top: 1rem;
+  }
+  
+  .login-form, .register-form {
+    padding: 1.5rem;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .app-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  

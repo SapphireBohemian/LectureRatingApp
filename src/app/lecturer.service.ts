@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LecturerService {
-  private apiUrl = 'http://localhost:3000/users'; // Update with your API endpoint
+  private apiUrl = 'https://192.168.0.145/users:3000'; // Update with your API endpoint
 
   constructor(private http: HttpClient) {}
 

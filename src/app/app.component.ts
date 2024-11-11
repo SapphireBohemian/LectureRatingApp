@@ -34,5 +34,10 @@ export class AppComponent implements OnInit {
     this.loggedInUserName = null;
     this.router.navigate(['/login']); // Redirect to login page after logout
   }
-
+  // Logo click to logout and go to the home page
+  logoClick(): void {
+    this.authService.logout();
+    this.loggedInUserName = null;
+    this.router.navigate(['/home']); // Redirect to home page after logout
+  }
 }

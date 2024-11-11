@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { FeedbackService } from '../feedback.service';
 import { NgForm } from '@angular/forms';
 import { ToastController } from '@ionic/angular'; // Import ToastController for user notifications
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-feedback',
@@ -21,7 +22,8 @@ export class FeedbackPage implements OnInit {
     private feedbackService: FeedbackService,
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController // Inject ToastController
+    private toastController: ToastController, // Inject ToastController
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -72,4 +74,9 @@ export class FeedbackPage implements OnInit {
     this.rating = 3; 
     this.department = '';
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }

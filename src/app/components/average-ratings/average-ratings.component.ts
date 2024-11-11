@@ -1,6 +1,7 @@
 //average-ratings.components.ts
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-average-ratings',
@@ -11,7 +12,7 @@ export class AverageRatingsComponent implements OnInit {
   averageRatings: any[] = [];
   overallAverage: number = 0; // Variable to hold overall average rating
 
-  constructor(private analyticsService: AnalyticsService) {}
+  constructor(private analyticsService: AnalyticsService, private location: Location) {}
 
   ngOnInit() {
     this.analyticsService.getAverageRatings().subscribe(data => {
@@ -24,4 +25,9 @@ export class AverageRatingsComponent implements OnInit {
     const totalRating = this.averageRatings.reduce((acc, rating) => acc + rating.averageRating, 0);
     this.overallAverage = totalRating / this.averageRatings.length;
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }

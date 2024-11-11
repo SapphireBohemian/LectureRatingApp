@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Register</ion-title>
+    <ion-buttons slot="start">
+  <ion-back-button defaultHref="/home"></ion-back-button>
+</ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="register()" #registerForm="ngForm">
+  <form (ngSubmit)="register()" #registerForm="ngForm" class="register-form">
     <ion-item>
       <ion-label position="floating">Username</ion-label>
       <ion-input [(ngModel)]="username" name="username" required></ion-input>
@@ -40,7 +43,13 @@
       </ion-select>
     </ion-item>
 
-    <ion-button expand="full" type="submit">Register</ion-button>
+    <ion-button expand="full" shape="round" color="primary" type="submit">Register</ion-button>
     <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
   </form>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>

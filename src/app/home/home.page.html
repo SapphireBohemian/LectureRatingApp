@@ -1,24 +1,59 @@
+<!-- Updated Home Page -->
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Lecture Rating Application
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>EduRate</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content [fullscreen]="true" class="home-page">
+  <div class="welcome-section">
+    <h2>Welcome to EduRate Application!</h2>
+    <p>Your feedback helps shape better learning experiences!</p>
+  </div>
   
-    <h2>Welcome to the Lecture Rating Application!</h2>
-    <p>Your feedback matters! Please login or register to submit feedback.</p>
-
-    <ion-button expand="full" [routerLink]="['/login']">Login</ion-button>
-    <ion-button expand="full" color="secondary" [routerLink]="['/register']">Register</ion-button>
+  <!-- Motivational Quote Section -->
+  <div class="motivational-section">
+    <blockquote>
+      <p>"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
+    </blockquote>
+  </div>
   
-  
+  <div class="button-group">
+    <ion-button expand="full" shape="round" color="success" [routerLink]="['/login']">Login</ion-button>
+    <ion-button expand="full" shape="round" color="light" [routerLink]="['/register']">Register</ion-button>
+  </div>
 </ion-content>
+
+<!-- Add styles for the home page -->
+<style>
+  .home-page {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text for contrast */
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .welcome-section h2, 
+  .welcome-section p,
+  .motivational-section blockquote p {
+    color: #87cefa; /* Light sky blue color for consistency */
+  }
+
+  .motivational-section {
+    margin: 20px;
+    padding: 15px;
+    background-color: #222; /* Dark grey background for contrast */
+    border-radius: 8px;
+  }
+  
+  blockquote {
+    font-style: italic;
+    border-left: 4px solid #87cefa; /* Light sky blue border for emphasis */
+    padding-left: 10px;
+  }
+  
+  .button-group ion-button {
+    margin-top: 10px; /* Space between buttons */
+  }
+</style>
+

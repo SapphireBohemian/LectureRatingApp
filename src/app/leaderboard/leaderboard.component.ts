@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaderboardService } from '../leaderboard.service';
+import { Location } from '@angular/common';
 
 interface Lecturer {
   _id: string;            // Assuming lecturer name is stored in _id
@@ -14,7 +15,7 @@ interface Lecturer {
 export class LeaderboardComponent implements OnInit {
   topLecturers: Lecturer[] = []; // Type the topLecturers as Lecturer array
 
-  constructor(private leaderboardService: LeaderboardService) {}
+  constructor(private leaderboardService: LeaderboardService, private location: Location) {}
 
   ngOnInit() {
     this.leaderboardService.getTopRatedLecturers().subscribe(
@@ -27,6 +28,10 @@ export class LeaderboardComponent implements OnInit {
         console.error('Error fetching top rated lecturers:', error);
       }
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
 

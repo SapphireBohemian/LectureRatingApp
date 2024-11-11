@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -22,6 +22,10 @@ import { PendingUsersComponent } from './admin/pending-users/pending-users.compo
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
+// Import Firebase initialization methods
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,11 +44,13 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule // Add FormsModule here
+    FormsModule
+     
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideHttpClient()
+    provideHttpClient(),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig))
   ],
   bootstrap: [AppComponent],
 })

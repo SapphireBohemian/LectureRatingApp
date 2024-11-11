@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AnalyticsService {
-  private baseUrl = 'http://localhost:3000/analytics';
+  private baseUrl = 'http://192.168.0.145/analytics:3000';
+  //private apiUrl = 'https://lecture-rating-backend.onrender.com'; // Backend URL
 
   constructor(private http: HttpClient) {}
 

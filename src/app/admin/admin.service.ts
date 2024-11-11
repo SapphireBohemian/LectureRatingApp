@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AdminService {
-  private apiUrl = 'http://localhost:3000'; // Your backend URL
+  private apiUrl = 'http://192.168.0.145:3000'; // Your backend URL
+  //private apiUrl = 'https://lecture-rating-backend.onrender.com:3000'; // Backend URL
 
   constructor(private http: HttpClient) {}
 

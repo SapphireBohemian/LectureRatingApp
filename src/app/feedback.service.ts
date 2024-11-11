@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';// Import the AuthService to access
   providedIn: 'root',
 })
 export class FeedbackService {
-  private apiUrl = 'http://localhost:3000/feedback';
+  private apiUrl = 'https://192.168.0.145/feedback:3000';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

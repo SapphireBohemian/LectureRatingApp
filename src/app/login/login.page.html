@@ -1,26 +1,32 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Login</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="login()" #loginForm="ngForm">
+  <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
     <ion-item>
       <ion-label position="floating">Username</ion-label>
       <ion-input [(ngModel)]="username" name="username" required></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label position="floating">Password</ion-label>
       <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
     </ion-item>
-
-    <ion-button expand="full" type="submit">Login</ion-button>
-
-    <ion-button expand="full" color="secondary" [routerLink]="['/register']">
+    <ion-button expand="full" shape="round" color="primary" type="submit">Login</ion-button>
+    <ion-button expand="full" color="secondary" shape="round" [routerLink]="['/register']">
       Register
     </ion-button>
   </form>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Display error message if login fails -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <ion-item lines="none" class="back-button-container">
+    <ion-button (click)="goBack()" color="primary" expand="block">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-item>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-student',
@@ -9,7 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class StudentPage implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private location: Location) { }
 
   ngOnInit() {
     // Ensure the user is authenticated
@@ -24,5 +25,8 @@ export class StudentPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  goBack() {
+    this.location.back();
+  }
   // Add other student functionalities here (e.g., view lectures, submit feedback)
 }

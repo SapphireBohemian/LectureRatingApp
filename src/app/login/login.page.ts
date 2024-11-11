@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginPage {
   password: string = '';
   errorMessage: string = ''; // Error message for failed login
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private location: Location) {}
 
   login() {
     if (this.username && this.password) {
@@ -42,5 +43,9 @@ export class LoginPage {
     } else {
       this.errorMessage = 'Please enter both username and password'; // Prompt for form validation
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/home']);
   }
 }

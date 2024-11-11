@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip } from 'chart.js';
 import { FeedbackService } from '../feedback.service';
+import { Location } from '@angular/common';
 
 // Register necessary Chart.js components
 Chart.register(CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip);
@@ -14,7 +15,7 @@ Chart.register(CategoryScale, LinearScale, BarController, BarElement, Title, Too
 export class RatingsGraphPage implements OnInit {
   topLecturers: { name: string; rating: number }[] = []; // Array to store top-rated lecturers
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(private feedbackService: FeedbackService, private location: Location) {}
 
   ngOnInit() {
     this.fetchRatings();
@@ -96,5 +97,9 @@ export class RatingsGraphPage implements OnInit {
         },
       });
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

@@ -1,62 +1,151 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="outline" color="light">
+        <ion-icon name="arrow-back"></ion-icon> Back
+      </ion-button>
+    </ion-buttons>
     <ion-title>Feedback Management</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let feedback of feedbackList">
-      <ion-label>{{ feedback.lecturerName }} - {{ feedback.course }}</ion-label>
-      <ion-button (click)="deleteFeedback(feedback._id)">Delete</ion-button>
-      <!-- Add an edit button/link here -->
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding stylish-background">
 
-  <form (submit)="addFeedback()">
-    <ion-item>
-      <ion-label position="floating">Lecturer Name</ion-label>
-      <ion-input [(ngModel)]="newFeedback.lecturerName" name="lecturerName" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Feedback</ion-label>
-      <ion-input [(ngModel)]="newFeedback.feedback" name="feedback" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Course</ion-label>
-      <ion-input [(ngModel)]="newFeedback.course" name="course" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Department</ion-label> <!-- New input for department -->
-      <ion-input [(ngModel)]="newFeedback.department" name="department" required></ion-input>
-    </ion-item>
+  <!-- Feedback List Card -->
+  <ion-card class="feedback-card">
+    <ion-card-header>
+      <ion-card-title>Feedback List</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let feedback of feedbackList" lines="none" class="feedback-item">
+        <ion-label>
+          <h2>{{ feedback.lecturerName }} - {{ feedback.course }}</h2>
+          <p>{{ feedback.feedback }}</p>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button class="delete-button" (click)="deleteFeedback(feedback._id)">Delete</ion-button>
+          
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 
-    <ion-item>
-      <ion-label>Rating</ion-label>
-      <ion-radio-group [(ngModel)]="newFeedback.rating" name="rating" required>
+  <!-- Feedback Form Card -->
+  <ion-card class="feedback-card">
+    <ion-card-header>
+      <ion-card-title>Add New Feedback</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (submit)="addFeedback()">
         <ion-item>
-          <ion-label>1</ion-label>
-          <ion-radio value="1"></ion-radio>
+          <ion-label position="floating">Lecturer Name</ion-label>
+          <ion-input [(ngModel)]="newFeedback.lecturerName" name="lecturerName" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>2</ion-label>
-          <ion-radio value="2"></ion-radio>
+          <ion-label position="floating">Feedback</ion-label>
+          <ion-textarea [(ngModel)]="newFeedback.feedback" name="feedback" required></ion-textarea>
         </ion-item>
         <ion-item>
-          <ion-label>3</ion-label>
-          <ion-radio value="3"></ion-radio>
+          <ion-label position="floating">Course</ion-label>
+          <ion-input [(ngModel)]="newFeedback.course" name="course" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>4</ion-label>
-          <ion-radio value="4"></ion-radio>
+          <ion-label position="floating">Department</ion-label>
+          <ion-input [(ngModel)]="newFeedback.department" name="department" required></ion-input>
         </ion-item>
+        
         <ion-item>
-          <ion-label>5</ion-label>
-          <ion-radio value="5"></ion-radio>
+          <ion-label>Rating</ion-label>
+          <ion-radio-group [(ngModel)]="newFeedback.rating" name="rating" required>
+            <ion-item *ngFor="let rating of [1, 2, 3, 4, 5]">
+              <ion-label>{{ rating }}</ion-label>
+              <ion-radio slot="start" [value]="rating"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
         </ion-item>
-      </ion-radio-group>
-    </ion-item>
+        
+        <ion-button expand="block" type="submit" class="add-button">Add Feedback</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-button type="submit">Add Feedback</ion-button>
-  </form>
+  <!-- Footer Back Button -->
+  <ion-footer>
+    <ion-button expand="block" color="primary" fill="solid" (click)="goBack()">
+      <ion-icon name="arrow-back"></ion-icon> Back
+    </ion-button>
+  </ion-footer>
+
 </ion-content>
+
+<!-- Add styles for the layout -->
+<style>
+  .stylish-background {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a); /* Dark gradient background */
+    color: #ffffff; /* White text color for better readability */
+  }
+
+  .feedback-card {
+    margin-bottom: 20px; /* Space between cards */
+    border-radius: 10px; /* Rounded corners for cards */
+    background-color: #333333; /* Darker card background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  }
+
+  ion-card-header {
+    background-color: #444444; /* Darker background for card header */
+    border-top-left-radius: 10px; /* Rounded corners for card header */
+    border-top-right-radius: 10px; /* Rounded corners for card header */
+    padding: 15px; /* Added padding for a more spacious feel */
+  }
+
+  ion-card-title {
+    font-size: 1.8em; /* Increased title font size */
+    font-weight: bold; /* Bold title for emphasis */
+    color: #ffffff; /* White color for better readability */
+    text-align: center; /* Center title */
+  }
+
+  .feedback-item {
+    background-color: #555555; /* Dark background for list items */
+    border-radius: 8px; /* Rounded corners for list items */
+    margin: 10px 0; /* Space between items in lists */
+    padding: 15px; /* Padding for better spacing */
+    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effect */
+  }
+
+  .feedback-item:hover {
+    background-color: #666666; /* Hover effect */
+    transform: scale(1.02); /* Slight scaling effect */
+  }
+
+  .delete-button {
+    background-color: #d9534f; /* Red background for delete button */
+    color: #ffffff; /* White text for contrast */
+    transition: background-color 0.2s; /* Transition for hover effect */
+  }
+
+  .delete-button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+  }
+
+  .edit-button {
+    background-color: #5bc0de; /* Light blue background for edit button */
+    color: #ffffff; /* White text for contrast */
+    transition: background-color 0.2s; /* Transition for hover effect */
+  }
+
+  .edit-button:hover {
+    background-color: #31b0d5; /* Darker blue on hover */
+  }
+
+  .add-button {
+    background-color: #5cb85c; /* Green background for add button */
+    color: #ffffff; /* White text for contrast */
+    transition: background-color 0.2s; /* Transition for hover effect */
+  }
+
+  .add-button:hover {
+    background-color: #449d44; /* Darker green on hover */
+  }
+</style>

@@ -1,6 +1,7 @@
 // pending-users.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pending-users',
@@ -10,7 +11,7 @@ import { AdminService } from '../admin.service';
 export class PendingUsersComponent implements OnInit {
   pendingUsers: any[] = [];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private location: Location) {}
 
   ngOnInit(): void {
     this.loadPendingUsers();
@@ -53,4 +54,7 @@ export class PendingUsersComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.location.back();
+  }
 }

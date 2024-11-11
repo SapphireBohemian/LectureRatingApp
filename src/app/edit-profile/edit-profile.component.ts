@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
@@ -16,7 +17,8 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.editProfileForm = this.fb.group({
       username: ['', Validators.required],
@@ -74,5 +76,9 @@ export class EditProfileComponent implements OnInit {
         }
       );
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

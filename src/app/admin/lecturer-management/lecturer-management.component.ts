@@ -1,6 +1,7 @@
 //lecturer-management.component.ts
 import { Component, OnInit } from '@angular/core';
 import { LecturerService } from 'src/app/lecturer.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-lecturer-management',
@@ -9,9 +10,9 @@ import { LecturerService } from 'src/app/lecturer.service';
 })
 export class LecturerManagementComponent implements OnInit {
   lecturers: any[] = [];
-  newLecturer = { username: '', password: '', role: 'lecturer' }; // Adjust according to your data model
+  newLecturer = { name:'', surname:'', email:'', username: '', password: '', role: 'lecturer' }; // Adjust according to your data model
 
-  constructor(private lecturerService: LecturerService) {}
+  constructor(private lecturerService: LecturerService, private location: Location) {}
 
   ngOnInit() {
     this.loadLecturers();
@@ -26,7 +27,7 @@ export class LecturerManagementComponent implements OnInit {
   addLecturer() {
     this.lecturerService.addLecturer(this.newLecturer).subscribe(() => {
       this.loadLecturers();
-      this.newLecturer = { username: '', password: '', role: 'lecturer' }; // Reset form
+      this.newLecturer = { name:'', surname:'', email:'', username: '', password: '', role: 'lecturer' }; // Reset form
     });
   }
 
@@ -36,5 +37,8 @@ export class LecturerManagementComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
   // Additional methods for editing can be added here
 }
